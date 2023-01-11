@@ -5,6 +5,7 @@ let satoitsuki = {
   name: '佐藤  樹',
   occupation: 'student, HAL tokyo',
   from: 'tokyo🇯🇵',
+  like: 'old clothes👲 sakurazaka46💃'
 };
 ```
 
