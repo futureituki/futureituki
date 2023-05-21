@@ -12,6 +12,7 @@ let satoitsuki = {
 ⬇︎status <br>
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)
+[![Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=otsukasatoshi&layout=compact)](https://github.com/otsukasatoshi)
 
 ### My Technical capabilities
 
