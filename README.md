@@ -63,3 +63,131 @@ let satoitsuki = {
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ![WebGL](https://img.shields.io/badge/WebGL-990000?logo=webgl&logoColor=white&style=for-the-badge)
+
+# ギャラ飲みチックアプリケーション
+類似アプリケーション [Pato](https://pato.today/guest/)
+
+## 開発
+- [運用ルール](#運用ルール)
+## 環境構築
+- [Docker環境構築](#Docker環境構築)
+- [PHP環境構築](#PHP環境構築)
+- [Nuxt環境構築](#Nuxt環境構築)
+  - [Frontendディレクトリセットアップ](#Frontendディレクトリセットアップ)
+  - [Adminディレクトリセットアップ](#Adminディレクトリセットアップ))
+- [エラーの対処法](#エラーの対処法)
+
+
+参照元のリンク
+@see
+https://jsdoc.app/tags-see.html
+
+## 運用ルール    
+
+*基本Docker経由でコマンドを打つ*
+
+*途中のPRの時はWIPをつけるかDraftPRで作成する、なぜ途中かをPRの内容に書いておくと直良*
+
+*Github開発*
+issueを基準にブランチを作成しましょう。    
+ブランチを作るときは、まずissueを立てましょう。    
+*ブランチを切る時は必ずローカルのmainブランチを起点にリモートのmainブランチをpullする*    
+
+*PRには必ず本文にissue番号を書いてください！*   
+そうするとissueからPRに飛べるので後で自分も管理しやすくなります   
+PR本文に`ref. #issue番号` (注意commit内容ではない  
+
+リスト型でかけるとissueの内容が展開されて良いです🙆‍♀️    
+- [ ] issue番号
+
+PRのマージは、最低1人のapprovedとテストが通ったらできるようにしています。    
+なので、PRを出したら、    
+まずは誰にレビューをしてもらうか、レビュアーを指定しましょう。    
+
+⚠️注意点として、レビューしてもらうコードの量は、   
+300行ぐらいに収めましょう。   
+どうしても多くなってしまう場合は、issueを分けましょう。    
+
+*コマンド操作についての質問をするときは、スクリーンショットも一緒に送りましょう*   
+両者がwinwinの関係になります。        
+
+*コメントを書くタイミング*    
+開発者を混乱させる実装を強制するときはコメントが役に立ちます    
+参照元のリンク   
+@see    
+https://jsdoc.app/tags-see.html
+
+## Docker環境構築
+まずは、Dockerを起動する   
+ターミナルに入り、ルートディレクトリで  
+`docker compose up -d`コマンドを叩く
+
+Dockerを停止したいときは   
+`docker compose down`コマンドを叩く
+
+## PHP環境構築
+ターミナルに入り、Dockerで構築したバックエンドの環境内に入り、    
+必要なパッケージをインストール
+
+- PHPのセットアップ
+```shell
+docker compose exec php-fpm sh -c "cd /php && ./composer.phar install"
+```
+
+静的解析を実行してくれるツール
+
+- PHPStan
+```shell
+docker compose exec php-fpm sh -c "cd /php && ./composer.phar phpstan"
+```
+
+- マイグレーション    
+新たに環境を構築するときは、またはDB構造を変更したときは、PHP環境内で、*必ずマイグレーションを実行する*   
+そうしないと、バックエンド側がおかしくなる。    
+
+```cd /db/
+./migrate -source file://migrations -database 'mysql://root:BzHSGDBv2fya@tcp(db:3306)/test' up
+```
+- APP_KEYは以下のコマンドで生成する
+```shell
+php -r "echo base64_encode(random_bytes(32));"
+```
+
+- PHPの記述ルール
+必ず Controllers,Models,Repositories,Services,Exceptionsにファイルを追加する場合は基底クラスを継承すること
+
+## Nuxt環境構築
+ターミナルに入り、Dockerで構築したフロントエンドの環境内に入り、    
+必要なパッケージをインストール
+
+Frontendディレクトリのセットアップ
+```shell
+docker compose exec workspace sh -c "cd /project/Frontend && npm install"
+```   
+
+Adminディレクトリのセットアップ
+```shell
+docker compose exec workspace sh -c "cd /project/Admin && npm install"
+```   
+Admin/下に管理画面系のJSは入っているので、そこに移動して npm installしたあとにnpm run devすると管理画面も見れます
+管理画面はログイン画面で適当にメアドとパスワードを入力してAPIを叩くと admin@example.comと送信したパスワードでアカウントが作成されます
+
+`npm run dev`で起動し、    
+`localhost:3001`を開き、表示されるか確認
+
+### タスクランナー
+- 開発環境起動 `npm run dev`
+- フォーマッター `npm run format`
+- 静的解析　 `npm run lint`
+
+PRを投げるときは、フォーマッターと静的解析を一度かけて、   
+エラーが出ていない状態で、PRを投げましょう    
+
+## エラーの対処法
+
+*まずはログを見よう！！*   
+`Api/log/error.log` 
+
+- Dockerを再起動、パソコンを再起動  
+
+- マイグレーションしてみる、それでも治らなければ、環境を作り直す
