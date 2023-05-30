@@ -74,13 +74,8 @@ let satoitsuki = {
 - [PHP環境構築](#PHP環境構築)
 - [Nuxt環境構築](#Nuxt環境構築)
   - [Frontendディレクトリセットアップ](#Frontendディレクトリセットアップ)
-  - [Adminディレクトリセットアップ](#Adminディレクトリセットアップ))
+  - [Adminディレクトリセットアップ](#Adminディレクトリセットアップ)
 - [エラーの対処法](#エラーの対処法)
-
-
-参照元のリンク
-@see
-https://jsdoc.app/tags-see.html
 
 ## 運用ルール    
 
@@ -113,9 +108,9 @@ PRのマージは、最低1人のapprovedとテストが通ったらできるよ
 
 *コメントを書くタイミング*    
 開発者を混乱させる実装を強制するときはコメントが役に立ちます    
-参照元のリンク   
+参照元のリンクを記述するときは     
 @see    
-https://jsdoc.app/tags-see.html
+[docルール](https://jsdoc.app/tags-see.html)
 
 ## Docker環境構築
 まずは、Dockerを起動する   
@@ -160,12 +155,12 @@ php -r "echo base64_encode(random_bytes(32));"
 ターミナルに入り、Dockerで構築したフロントエンドの環境内に入り、    
 必要なパッケージをインストール
 
-Frontendディレクトリのセットアップ
+### Frontendディレクトリのセットアップ
 ```shell
 docker compose exec workspace sh -c "cd /project/Frontend && npm install"
 ```   
 
-Adminディレクトリのセットアップ
+### Adminディレクトリのセットアップ
 ```shell
 docker compose exec workspace sh -c "cd /project/Admin && npm install"
 ```   
