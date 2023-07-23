@@ -9,18 +9,7 @@ let satoitsuki = {
   like: 'old clothes👲 sakurazaka46💃'
 };
 ```
-
-⬇︎status <br>
-
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=futureituki)](https://github.com/anuraghazra/github-readme-stats)
-[![Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=futureituki&layout=compact)](https://github.com/futureituki)
-[![trophy](https://github-profile-trophy.vercel.app/?username=futureituki&theme=onedark&column=7)](https://github.com/ryo-ma/github-profile-trophy)
 ### My Technical capabilities
-
-## using
-![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
-
-### Frequency of use
 
 # Often
 
