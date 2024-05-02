@@ -3,8 +3,8 @@
 ```js
 let satoitsuki = {
   name: '佐藤  樹',
-  age : 20, 
-  occupation: 'student, HAL tokyo',
+  age : 21, 
+  occupation: '',
   from: 'tokyo🇯🇵',
   like: 'old clothes👲 sakurazaka46💃'
 };
